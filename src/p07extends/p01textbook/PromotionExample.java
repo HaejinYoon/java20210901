@@ -1,4 +1,4 @@
-package p07extends;
+package p07extends.p01textbook;
 
 class A {}
 

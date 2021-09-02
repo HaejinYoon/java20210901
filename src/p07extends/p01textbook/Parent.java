@@ -1,4 +1,4 @@
-package p07extends;
+package p07extends.p01textbook;
 
 public class Parent {
 	public void method1() {

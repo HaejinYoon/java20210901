@@ -1,4 +1,4 @@
-package p07extends;
+package p07extends.p01textbook;
 
 public class ChildExample {
 	public static void main(String[] args) {
