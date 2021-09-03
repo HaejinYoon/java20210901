@@ -1,4 +1,4 @@
-package p06class.p01textbook.exercise.p20;
+package p06class.p01textbook.exercise.p20.advanced;
 
 public class Account {
 	private String ano;

@@ -1,6 +1,6 @@
-package p06class.p01textbook.exercise.p20;
+package p06class.p01textbook.exercise.p20.advanced;
 
-import java.util.Arrays;
+
 import java.util.Scanner;
 
 public class BankApplication {
@@ -18,19 +18,29 @@ public class BankApplication {
 			
 			int selectNo = scanner.nextInt();
 			
-			if(selectNo==1) {
+			switch (selectNo) {
+			case 1:
 				creatAccount();
-			} else if(selectNo==2) {
+				break;
+			case 2:
 				accountList();
-			} else if(selectNo==3) {
+				break;
+			case 3:
 				deposit();
-			} else if(selectNo==4) {
+				break;
+			case 4:
 				withdraw();
-			} else if(selectNo==5) {
+				break;
+			case 5:
 				run = false;
-			}	
+				System.out.println("프로그램 종료");
+				break;
+			default:
+				
+				break;
+			}
+		
 		}
-		System.out.println("프로그램 종료");
 	}
 
 	private static void creatAccount() {
@@ -43,15 +53,13 @@ public class BankApplication {
 		
 		System.out.print("계좌번호: ");
 		String ano = scanner.next();
-		//a1.setAno(ano);
 		
 		System.out.print("계좌주: ");
 		String owner = scanner.next();
-		//a1.setOwner(owner);
 		
 		System.out.print("초기입금액: ");
 		int balance = scanner.nextInt();
-		//a1.setBalance(balance);
+
 		Account a1 = new Account(ano, owner, balance);
 		for(int i=0;i<accountArray.length;i++) {
 			if(accountArray[i] == null) {
@@ -59,10 +67,7 @@ public class BankApplication {
 				System.out.println("결과: 계좌가 생성되었습니다.");
 				break;
 			}
-			
 		}
-		
-		
 	}
 	
 	private static void accountList() {
@@ -90,9 +95,6 @@ public class BankApplication {
 		System.out.println("예금");
 		System.out.println("------------");
 		
-		
-		
-		
 		System.out.print("계좌번호: ");
 		String ano=scanner.next();
 		Account fAcc = findAccount(ano);
@@ -100,15 +102,6 @@ public class BankApplication {
 		int balance = scanner.nextInt();
 		fAcc.setBalance(fAcc.getBalance()+balance);
 		
-		
-		//		for(int i=0; i<accountArray.length; i++) {
-//			Account account = accountArray[i];
-//			if(acc.getAno() == account.getAno()) {
-//				System.out.print("예금액: ");
-//				account.setBalance(account.getBalance()+scanner.nextInt());
-//				break;
-//			}
-//		}
 		System.out.println("예금에 성공하였습니다.");
 		
 	}
@@ -120,10 +113,20 @@ public class BankApplication {
 		
 		System.out.print("계좌번호: ");
 		String ano=scanner.next();
-		Account fAcc = findAccount(ano);
-		System.out.print("출금액: ");
-		int balance = scanner.nextInt();
-		fAcc.setBalance(fAcc.getBalance()-balance);
+		while(true) {
+			Account fAcc = findAccount(ano);
+			System.out.print("출금액: ");
+			int balance = scanner.nextInt();
+			if(fAcc.getBalance()-balance<0) {
+				System.out.println("출금한도를 초과하였습니다.");
+				System.out.println("금액을 다시 입력해주세요.");
+				
+			} else {
+				fAcc.setBalance(fAcc.getBalance()-balance);
+				break;
+			}
+		}
+		System.out.println("출금에 성공하였습니다.");
 		
 	}
 	
