@@ -39,17 +39,14 @@ public class BankApplication {
 				
 				break;
 			}
-		
 		}
 	}
 
 	private static void creatAccount() {
-		
-		
+
 		System.out.println("------------");
 		System.out.println("계좌생성");
 		System.out.println("------------");
-		
 		
 		System.out.print("계좌번호: ");
 		String ano = scanner.next();
@@ -85,9 +82,6 @@ public class BankApplication {
 				System.out.println(account.getBalance());
 			} 
 		}
-		
-		
-		
 	}
 	
 	private static void deposit() {
@@ -98,12 +92,11 @@ public class BankApplication {
 		System.out.print("계좌번호: ");
 		String ano=scanner.next();
 		Account fAcc = findAccount(ano);
+		
 		System.out.print("예금액: ");
 		int balance = scanner.nextInt();
 		fAcc.setBalance(fAcc.getBalance()+balance);
-		
 		System.out.println("예금에 성공하였습니다.");
-		
 	}
 	
 	private static void withdraw() {
@@ -120,14 +113,12 @@ public class BankApplication {
 			if(fAcc.getBalance()-balance<0) {
 				System.out.println("출금한도를 초과하였습니다.");
 				System.out.println("금액을 다시 입력해주세요.");
-				
 			} else {
 				fAcc.setBalance(fAcc.getBalance()-balance);
 				break;
 			}
 		}
 		System.out.println("출금에 성공하였습니다.");
-		
 	}
 	
 	private static Account findAccount(String ano) {

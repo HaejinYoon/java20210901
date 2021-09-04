@@ -35,34 +35,27 @@ public class BankApplication {
 
 	private static void creatAccount() {
 		
-		
 		System.out.println("------------");
 		System.out.println("계좌생성");
 		System.out.println("------------");
 		
-		
 		System.out.print("계좌번호: ");
 		String ano = scanner.next();
-		//a1.setAno(ano);
 		
 		System.out.print("계좌주: ");
 		String owner = scanner.next();
-		//a1.setOwner(owner);
-		
+
 		System.out.print("초기입금액: ");
 		int balance = scanner.nextInt();
-		//a1.setBalance(balance);
+
 		Account a1 = new Account(ano, owner, balance);
 		for(int i=0;i<accountArray.length;i++) {
 			if(accountArray[i] == null) {
 				accountArray[i]=a1;
 				System.out.println("결과: 계좌가 생성되었습니다.");
 				break;
-			}
-			
+			}	
 		}
-		
-		
 	}
 	
 	private static void accountList() {
@@ -80,9 +73,6 @@ public class BankApplication {
 				System.out.println(account.getBalance());
 			} 
 		}
-		
-		
-		
 	}
 	
 	private static void deposit() {
@@ -90,17 +80,12 @@ public class BankApplication {
 		System.out.println("예금");
 		System.out.println("------------");
 		
-		
-		
-		
 		System.out.print("계좌번호: ");
 		String ano=scanner.next();
 		Account fAcc = findAccount(ano);
 		System.out.print("예금액: ");
 		int balance = scanner.nextInt();
 		fAcc.setBalance(fAcc.getBalance()+balance);
-		
-		
 		//		for(int i=0; i<accountArray.length; i++) {
 //			Account account = accountArray[i];
 //			if(acc.getAno() == account.getAno()) {
