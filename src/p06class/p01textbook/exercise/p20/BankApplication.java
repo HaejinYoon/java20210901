@@ -64,14 +64,17 @@ public class BankApplication {
 		System.out.println("------------");
 		
 		for (int i = 0; i<accountArray.length;i++) {
-			Account account = accountArray[i];
+			if(accountArray[i] != null)System.out.println(accountArray[i]);
+			
+			/*Account account = accountArray[i];
 			if(account != null) {
 				System.out.print(account.getAno());
 				System.out.print("\t");
 				System.out.print(account.getOwner());
 				System.out.print("\t");
 				System.out.println(account.getBalance());
-			} 
+				*/
+			
 		}
 	}
 	
