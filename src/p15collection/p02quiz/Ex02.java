@@ -49,11 +49,10 @@ public class Ex02 {
 				System.out.println("Total: "+sum);
 				System.out.println("Average: "+avg);
 				
-				int max = max(arr);
-				int min = min(arr);
-
-				System.out.println("Max: "+max);
-				System.out.println("Min: "+min);
+//				int max = max(arr);
+//				int min = min(arr);
+				maxmin(arr);
+				
 				break;
 			default:
 				if(a>=50) {
@@ -71,7 +70,17 @@ public class Ex02 {
 		scan.close();
 	}
 
-
+	private static void maxmin(ArrayList<Integer> arr) {
+		ArrayList<Integer> tmp = new ArrayList<>();
+		tmp.addAll(arr);
+		Collections.sort(tmp);
+		
+		int max=tmp.get(tmp.size()-1);
+		int min=tmp.get(0);
+		
+		System.out.println("Max: "+max);
+		System.out.println("Min: "+min);
+	}
 
 	private static int min(ArrayList<Integer> list) {
 		if (list.isEmpty()) {
