@@ -1,9 +1,9 @@
 package p15collection.p02quiz;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
-import p06class.p01textbook.exercises.p20.Account;
+import p06class.p01textbook.exercise.p20.Account;
 
 public class BankApplication {
 //		private static Account[] accountArray = new Account[100];
@@ -15,7 +15,7 @@ public class BankApplication {
 		boolean run = true;
 		while(run) {
 			System.out.println("---------------------------------------------------------------");
-			System.out.println("1.계좌생성 | 2.계좌목록 | 3.예금 | 4.출금 | 5.계좌삭제 |6.종료");
+			System.out.println("1.계좌생성 | 2.계좌목록 | 3.예금 | 4.출금 | 5.계좌삭제 | 6.종료");
 			System.out.println("---------------------------------------------------------------");
 			System.out.print("선택> ");
 			
@@ -39,7 +39,7 @@ public class BankApplication {
 				}
 			} catch (Exception e) {
 				System.out.println("1~6사이 숫자만 입력해 주세요.");
-				break;
+				
 			}
 		}
 		System.out.println("프로그램 종료");
@@ -47,7 +47,7 @@ public class BankApplication {
 
 	private static void removeAccount() {
 		System.out.println("------------");
-		System.out.println("계좌삭제");
+		System.out.println("|계좌삭제  |");
 		System.out.println("------------");	
 		
 		System.out.println("삭제할 계좌변호를 입력하세요.");
@@ -66,48 +66,49 @@ public class BankApplication {
 	private static void creatAccount() {
 		
 		System.out.println("------------");
-		System.out.println("계좌생성");
+		System.out.println("|계좌생성  |");
 		System.out.println("------------");
 		
-		System.out.print("계좌번호: ");
-		String ano = scanner.next();
-		
-		System.out.print("계좌주: ");
-		String owner = scanner.next();
-
-		System.out.print("초기입금액: ");
-		int balance = scanner.nextInt();
-
-		Account a1 = new Account(ano, owner, balance);
-		accountArray.add(a1);
-		System.out.println("계좌가 생성되었습니다.");	
+		boolean run = true;
+		while(run) {
+			System.out.print("계좌번호: ");
+			String ano=scanner.next(); 
+			if(Pattern.matches("[0-9]{4}-[0-9]{4}", ano)) {
+				if(findAccountDup(ano)) {
+					System.out.print("계좌주: ");
+					String owner = scanner.next();
+					
+					System.out.print("초기입금액: ");
+					int balance = scanner.nextInt();
+					
+					Account a1 = new Account(ano, owner, balance);
+					accountArray.add(a1);
+					System.out.println("계좌가 생성되었습니다.");
+					run=false;
+				} 
+				break;
+			}else {
+				System.out.println("계좌번호 형식은 \"1111-1111\" 입니다.");
+			}
+		}
 	}
 	
 	private static void accountList() {
 		System.out.println("------------");
-		System.out.println("계좌목록");
+		System.out.println("|계좌목록  |");
 		System.out.println("------------");
 		
-		System.out.println("계좌번호 | 계좌주 | 계좌잔액");
+		System.out.println("계좌번호   |   계좌주   |   계좌잔액");
 		for (int i = 0; i<accountArray.size();i++) {
 			if(accountArray.get(i) != null)
 				System.out.println(accountArray.get(i));
-			
-			/*Account account = accountArray[i];
-			if(account != null) {
-				System.out.print(account.getAno());
-				System.out.print("\t");
-				System.out.print(account.getOwner());
-				System.out.print("\t");
-				System.out.println(account.getBalance());
-				*/
-			
+		
 		}
 	}
 	
 	private static void deposit() {
 		System.out.println("------------");
-		System.out.println("예금");
+		System.out.println("|예금      |");
 		System.out.println("------------");
 		
 		System.out.print("계좌번호: ");
@@ -133,7 +134,7 @@ public class BankApplication {
 	
 	private static void withdraw() {
 		System.out.println("------------");
-		System.out.println("출금");
+		System.out.println("|출금      |");
 		System.out.println("------------");
 		
 		System.out.print("계좌번호: ");
@@ -142,22 +143,42 @@ public class BankApplication {
 		
 		System.out.println("현재 잔액은 "+fAcc.getBalance()+"원 입니다.");
 		
-		System.out.print("출금액: ");
-		int balance = scanner.nextInt();
-		fAcc.setBalance(fAcc.getBalance()-balance);
+		while(true) {
+			System.out.print("출금액: ");
+			int balance = scanner.nextInt();
+			if(fAcc.getBalance()-balance<0) {
+				System.out.println("출금한도를 초과하였습니다.");
+				System.out.println("금액을 다시 입력해주세요.");
+			} else {
+				fAcc.setBalance(fAcc.getBalance()-balance);
+				System.out.println("계좌에서 "+balance+"원 만큼 인출되었습니다.");
+				System.out.println("잔액은 "+fAcc.getBalance()+"원 입니다.");
+				break;
+			}
+		}
 		
-		System.out.println("계좌에서 "+balance+"원 만큼 인출되었습니다.");
-		System.out.println("잔액은 "+fAcc.getBalance()+"원 입니다.");
 	}
 	
 	private static Account findAccount(String ano) {
 		for(int i=0; i<accountArray.size(); i++) {
 			Account account = accountArray.get(i);
-			if(ano.contentEquals(account.getAno())) {
+			if(ano.equals(account.getAno())) {
 				return account;
 			}
 		}
+		System.out.println("찾는 계좌가 없습니다.");
 		return null;
+	}
+	
+	private static boolean findAccountDup(String ano) {
+		for(int i=0;i<accountArray.size();i++) {
+			Account account = accountArray.get(i);
+			if(ano.equals(account.getAno())) {
+				System.out.println("중복된 계좌번호입니다.");
+				return false;
+			}
+		}
+		return true;
 	}
 	
 }
