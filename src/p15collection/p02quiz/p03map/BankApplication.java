@@ -65,9 +65,9 @@ public class BankApplication {
 					String owner = scanner.next();
 					
 					System.out.print("초기입금액: ");
-					int balacn
+					int balance;
 					try {
-						int balance = scanner.nextInt();
+						 balance = scanner.nextInt();
 						
 					} catch (Exception e) {
 						
