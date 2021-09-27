@@ -15,21 +15,21 @@ public class ContainerExample {
 	}
 }
 
-class Container<T,S> {
-	private T name;
-	private S job;
+class Container<T, S> {
+	private T t;
+	private S s;
 	
 	
 	public T getKey() {
-		return name;
+		return t;
 	}
 	
 	public S getValue() {
-		return job;
+		return s;
 	}
 	public void set(T t, S s) {
-		this.name=t;
-		this.job=s;
+		this.t=t;
+		this.s=s;
 	}
 	
 	
