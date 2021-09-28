@@ -19,7 +19,9 @@ public class Ex10 {
 				return s.substring(s.length()-2);
 			}
 		});
-//		list.replaceAll(i -> i.substring(i.length()-2,i.length()));
+		
+		//삼항연산식 활용
+		list.replaceAll(i -> i.length() <= 2 ? i : i.substring(i.length()-2));
 		
 		
 		System.out.println(list); //[va, ng, ml, a, , ss]
