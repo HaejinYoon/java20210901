@@ -12,6 +12,7 @@ public class Ex11 {
 		
 		Scanner scan = new Scanner(System.in);
 		Writer wr = new FileWriter(name);
+		
 		boolean run = true;
 		while(run) {
 			System.out.print("입력> ");
@@ -21,8 +22,8 @@ public class Ex11 {
 			}
 			wr.write(str);
 			wr.write("\n");
+			wr.flush();
 		}
-		
 		
 		System.out.println("Done");
 		scan.close();
