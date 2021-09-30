@@ -11,9 +11,6 @@ public class Ex09 {
 		for(int i=65;i<91;i++) {
 			wr.write(i);
 		}
-				
-		
-		
 		wr.close();
 	}
 }
